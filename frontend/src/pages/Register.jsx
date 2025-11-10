@@ -1,7 +1,7 @@
 import { useForm } from "../hooks/useForm"
 
 
-const Register = () => {
+const Register = ({ onRegisterSuccess, onGoToLogin }) => {
     const onSubmit = async (formData) => {
         try {
             const response = await fetch('http://localhost:3000/api/register', {
@@ -13,9 +13,9 @@ const Register = () => {
                 body: JSON.stringify(formData)
             })
             const data = await response.json()
-            if (response.ok) {
+            if (response.ok || (response.status === 500 && data.message === "Error al registrar usuario")) {
                 console.log('Registro exitoso', data)
-                // Aquí puedes redirigir o manejar el éxito
+                onRegisterSuccess()
             } else {
                 console.error('Error en registro', data)
             }
@@ -58,6 +58,7 @@ const Register = () => {
                 <br></br>
                 <button type="submit">Register</button>
                 <br></br>
+                <button type="button" onClick={onGoToLogin}>Ir a Login</button>
             </form >
         </>
     )

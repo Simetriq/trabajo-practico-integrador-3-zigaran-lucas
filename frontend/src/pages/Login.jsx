@@ -2,7 +2,7 @@ import { useForm } from "../hooks/useForm"
 
 
 
-const Login = () => {
+const Login = ({ onLoginSuccess, onGoToRegister }) => {
     const onSubmit = async (formData) => {
         try {
             const response = await fetch('http://localhost:3000/api/login', {
@@ -16,7 +16,7 @@ const Login = () => {
             const data = await response.json()
             if (response.ok) {
                 console.log('Login exitoso', data)
-                // Aquí puedes redirigir o manejar el éxito
+                onLoginSuccess()
             } else {
                 console.error('Error en login', data)
             }
@@ -43,6 +43,7 @@ const Login = () => {
                 <br></br>
                 <button type="submit">Login</button>
                 <br></br>
+                <button type="button" onClick={onGoToRegister}>Ir a Registro</button>
             </form >
 
         </>
