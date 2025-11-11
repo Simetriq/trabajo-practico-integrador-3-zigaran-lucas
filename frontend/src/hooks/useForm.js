@@ -11,7 +11,6 @@ export const useForm = (initialForm, onSubmit, validations = {}) => {
             ...form,
             [e.target.name]: e.target.value
         })
-        // Clear error on change
         if (errors[e.target.name]) {
             setErrors({
                 ...errors,
@@ -33,10 +32,6 @@ export const useForm = (initialForm, onSubmit, validations = {}) => {
             }
             if (validations[field].minLength && form[field]?.length < validations[field].minLength) {
                 newErrors[field] = `Debe tener al menos ${validations[field].minLength} caracteres`
-            }
-            // Add email validation
-            if (validations[field].email && form[field] && !/\S+@\S+\.\S+/.test(form[field])) {
-                newErrors[field] = 'Debe ser un email válido'
             }
         }
         setErrors(newErrors)
