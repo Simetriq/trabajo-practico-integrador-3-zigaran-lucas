@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import Loading from '../components/Loading'
 
-const Profile = ({ onLogout }) => {
+const Profile = () => {
+    const navigate = useNavigate()
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -13,42 +17,44 @@ const Profile = ({ onLogout }) => {
                     const data = await response.json()
                     setUser(data.user)
                 } else {
-                    console.error('Error al obtener perfil')
+                    navigate('/login')
                 }
             } catch (error) {
-                console.error('Error:', error)
+                navigate('/login')
+            } finally {
+                setLoading(false)
             }
         }
         fetchProfile()
-    }, [])
+    }, [navigate])
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/logout', {
+            await fetch('http://localhost:3000/api/logout', {
                 method: 'POST',
                 credentials: 'include'
             })
-            if (response.ok) {
-                onLogout()
-            } else {
-                console.error('Error al cerrar sesión')
-            }
+            navigate('/login')
         } catch (error) {
-            console.error('Error:', error)
+            console.error('Error al cerrar sesión')
         }
     }
 
-    if (!user) {
-        return <div>Cargando...</div>
-    }
+    if (loading) return <Loading />
+
+    if (!user) return <div>Error al cargar perfil</div>
 
     return (
-        <div>
-            <h1>Perfil</h1>
-            <p>ID: {user.id}</p>
-            <p>Nombre: {user.name}</p>
-            <p>Apellido: {user.lastname}</p>
-            <button onClick={handleLogout}>Logout</button>
+        <div className="max-w-md mx-auto mt-10">
+            <div className="bg-white p-6 rounded shadow-md">
+                <h1 className="text-2xl mb-4">Perfil</h1>
+                <p><strong>ID:</strong> {user.id}</p>
+                <p><strong>Nombre:</strong> {user.name}</p>
+                <p><strong>Apellido:</strong> {user.lastname}</p>
+                <button onClick={handleLogout} className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+                    Logout
+                </button>
+            </div>
         </div>
     )
 }
