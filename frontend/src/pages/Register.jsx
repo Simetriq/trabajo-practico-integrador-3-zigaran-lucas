@@ -2,6 +2,7 @@ import { useForm } from "../hooks/useForm"
 
 
 const Register = ({ onRegisterSuccess, onGoToLogin }) => {
+    
     const onSubmit = async (formData) => {
         try {
             const response = await fetch('http://localhost:3000/api/register', {
