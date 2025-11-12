@@ -23,7 +23,7 @@ export const useForm = (initialForm, onSubmit, validations = {}) => {
         setForm(initialForm)
         setErrors({})
     }
-
+//! Por si queres hacer una validacion
     const validate = () => {
         const newErrors = {}
         for (const field in validations) {
