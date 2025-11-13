@@ -2,9 +2,9 @@ import { Link } from 'react-router'
 
 const Navbar = ({ isAuthenticated, onLogout }) => {
     return (
-        <nav className="bg-blue-600 text-white p-4">
+        <nav className="bg-yellow-400 text-black p-4">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="text-xl font-bold">Task Manager</Link>
+                <Link to="/" className="text-xl font-bold">Simpson's Task Manager</Link>
                 <div className="space-x-4">
                     {isAuthenticated ? (
                         <>

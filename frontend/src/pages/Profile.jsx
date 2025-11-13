@@ -46,7 +46,7 @@ const Profile = () => {
 
     return (
         <div className="max-w-md mx-auto mt-10">
-            <div className="bg-white p-6 rounded shadow-md">
+            <div className="bg-yellow-100 p-6 rounded shadow-md">
                 <h1 className="text-2xl mb-4">Perfil</h1>
                 <p><strong>ID:</strong> {user.id}</p>
                 <p><strong>Nombre:</strong> {user.name}</p>

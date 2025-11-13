@@ -103,7 +103,7 @@ const Tasks = () => {
 
     return (
         <div className="max-w-4xl mx-auto mt-10">
-            <div className="bg-white p-6 rounded shadow-md">
+            <div className="bg-yellow-100 p-6 rounded shadow-md">
                 <h1 className="text-3xl mb-4">Tareas</h1>
                 <button
                     onClick={() => { setShowForm(!showForm); setEditingTask(null); handleResetForm() }}
@@ -113,7 +113,7 @@ const Tasks = () => {
                 </button>
 
                 {showForm && (
-                    <form onSubmit={handleSubmit} className="mb-6 p-4 border rounded">
+                    <form onSubmit={handleSubmit} className="mb-6 p-4 border rounded bg-yellow-50">
                         <h2 className="text-xl mb-2">{editingTask ? 'Editar Tarea' : 'Nueva Tarea'}</h2>
                         <div className="mb-2">
                             <label className="block">Título</label>
@@ -156,13 +156,13 @@ const Tasks = () => {
                         <p>No hay tareas</p>
                     ) : (
                         tasks.map(task => (
-                            <div key={task.id} className={`p-4 border rounded ${task.is_completed ? 'bg-green-50 line-through' : 'bg-white'}`}>
+                            <div key={task.id} className={`p-4 border rounded ${task.is_completed ? 'bg-blue-50 line-through' : 'bg-yellow-50'}`}>
                                 <h3 className="text-lg font-bold">{task.title}</h3>
                                 <p>{task.description}</p>
                                 <div className="mt-2 space-x-2">
                                     <button
                                         onClick={() => handleToggleComplete(task)}
-                                        className={`px-3 py-1 rounded ${task.is_completed ? 'bg-yellow-500' : 'bg-green-500'} text-white`}
+                                        className={`px-3 py-1 rounded ${task.is_completed ? 'bg-orange-500' : 'bg-green-500'} text-white`}
                                     >
                                         {task.is_completed ? 'Marcar Pendiente' : 'Marcar Completada'}
                                     </button>
